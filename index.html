@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Qibla Direction Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label, input, button { margin-bottom: 10px; display: block; width: 100%; max-width: 300px; }
+    #resultBox { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+  </style>
+</head>
+<body>
+  <h2>Qibla Direction Finder</h2>
+
+  <label>Latitude (Decimal Degrees):</label>
+  <input id="latitude" type="number" step="any" placeholder="e.g. 37.7749">
+
+  <label>Longitude (Decimal Degrees):</label>
+  <input id="longitude" type="number" step="any" placeholder="e.g. -122.4194">
+
+  <button id="calculateBtn">Get Qibla Direction</button>
+
+  <div id="resultBox">
+    <strong>Result:</strong>
+    <p id="result">Enter coordinates and press the button to calculate.</p>
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      function calculateQibla() {
+        const lat = parseFloat(document.getElementById("latitude").value);
+        const lon = parseFloat(document.getElementById("longitude").value);
+
+        const kaabaLat = 21.4225;
+        const kaabaLon = 39.8262;
+
+        const phi1 = lat * Math.PI / 180;
+        const phi2 = kaabaLat * Math.PI / 180;
+        const deltaLon = (kaabaLon - lon) * Math.PI / 180;
+
+        const x = Math.sin(deltaLon);
+        const y = Math.cos(phi1) * Math.tan(phi2) - Math.sin(phi1) * Math.cos(deltaLon);
+
+        let qiblaDeg = Math.atan2(x, y) * 180 / Math.PI;
+        qiblaDeg = (qiblaDeg + 360) % 360;
+
+        document.getElementById("result").innerText =
+          `Qibla direction: ${qiblaDeg.toFixed(2)}° from North`;
+      }
+
+      document.getElementById("calculateBtn").addEventListener("click", calculateQibla);
+    });
+  </script>
+</body>
+</html>
