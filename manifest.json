@@ -1,8 +1,0 @@
-{
-"name":"Sunrise & Sunset Finder",
-"short_name":"Sunrise",
-"start_url":"./index.html",
-"display":"standalone",
-"background_color":"#2b6cb0",
-"theme_color":"#2b6cb0"
-}
