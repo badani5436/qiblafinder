@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Qibla Finder</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="badge">🕌</div>
+      <div class="titleblock">
+        <h1>Qibla Finder</h1>
+        <p>GPS or manual coordinates (Decimal / DMS)</p>
+      </div>
+    </header>
+
+    <main class="card">
+      <button class="btn primary" id="btnGps">📍 Use my current location</button>
+
+      <div class="divider"><span>or enter coordinates</span></div>
+
+      <div class="seg">
+        <button class="pill active" id="pillDecimal" type="button">Decimal</button>
+        <button class="pill" id="pillDms" type="button">DMS</button>
+      </div>
+
+      <section id="decimalSection">
+        <label class="lbl">Latitude
+          <input inputmode="decimal" id="decLat" placeholder="e.g., 25.2048" />
+        </label>
+        <label class="lbl">Longitude
+          <input inputmode="decimal" id="decLon" placeholder="e.g., 55.2708 (or -77.34)" />
+        </label>
+      </section>
+
+      <section id="dmsSection" class="hidden">
+        <div class="grid2">
+          <div>
+            <div class="subhead">Latitude</div>
+            <div class="grid3">
+              <input inputmode="numeric" id="latDeg" placeholder="Deg" />
+              <input inputmode="numeric" id="latMin" placeholder="Min" />
+              <input inputmode="decimal" id="latSec" placeholder="Sec" />
+            </div>
+            <select id="latDir" class="sel">
+              <option value="N">N</option>
+              <option value="S">S</option>
+            </select>
+          </div>
+
+          <div>
+            <div class="subhead">Longitude</div>
+            <div class="grid3">
+              <input inputmode="numeric" id="lonDeg" placeholder="Deg" />
+              <input inputmode="numeric" id="lonMin" placeholder="Min" />
+              <input inputmode="decimal" id="lonSec" placeholder="Sec" />
+            </div>
+            <select id="lonDir" class="sel">
+              <option value="E">E</option>
+              <option value="W">W</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <button class="btn" id="btnCalc">🧭 Calculate Qibla</button>
+
+      <section class="out">
+        <div class="row">
+          <div class="k">Latitude</div>
+          <div class="v" id="outLat">—</div>
+        </div>
+        <div class="row">
+          <div class="k">Longitude</div>
+          <div class="v" id="outLon">—</div>
+        </div>
+        <div class="row big">
+          <div class="k">Qibla</div>
+          <div class="v" id="outQibla">—</div>
+        </div>
+        <div class="hint" id="outHint"></div>
+      </section>
+
+      <footer class="foot">
+        <div class="tiny">Tip: On iPhone Compass, enable <b>Use True North</b> for best matching.</div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
